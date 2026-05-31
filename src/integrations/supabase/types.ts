@@ -14,7 +14,218 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      bookings: {
+        Row: {
+          created_at: string
+          id: string
+          metadata: Json
+          preferred_time: string | null
+          property_id: string | null
+          session_id: string | null
+          status: string
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          metadata?: Json
+          preferred_time?: string | null
+          property_id?: string | null
+          session_id?: string | null
+          status?: string
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          metadata?: Json
+          preferred_time?: string | null
+          property_id?: string | null
+          session_id?: string | null
+          status?: string
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "bookings_property_id_fkey"
+            columns: ["property_id"]
+            isOneToOne: false
+            referencedRelation: "properties"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "bookings_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      events: {
+        Row: {
+          created_at: string
+          event_type: string
+          id: string
+          metadata: Json
+          property_id: string | null
+          session_id: string | null
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          event_type: string
+          id?: string
+          metadata?: Json
+          property_id?: string | null
+          session_id?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          event_type?: string
+          id?: string
+          metadata?: Json
+          property_id?: string | null
+          session_id?: string | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "events_property_id_fkey"
+            columns: ["property_id"]
+            isOneToOne: false
+            referencedRelation: "properties"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "events_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      localities: {
+        Row: {
+          created_at: string
+          id: string
+          lat: number
+          lng: number
+          name: string
+          overall_score: number
+          ratings: Json
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          lat: number
+          lng: number
+          name: string
+          overall_score?: number
+          ratings?: Json
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          lat?: number
+          lng?: number
+          name?: string
+          overall_score?: number
+          ratings?: Json
+        }
+        Relationships: []
+      }
+      properties: {
+        Row: {
+          bhk: number[]
+          builder: string
+          created_at: string
+          highlights: string[]
+          id: string
+          images: string[]
+          lat: number
+          lng: number
+          locality_id: string | null
+          manual_priority: number
+          name: string
+          price_max: number
+          price_min: number
+          property_type: string
+          status: string
+        }
+        Insert: {
+          bhk?: number[]
+          builder: string
+          created_at?: string
+          highlights?: string[]
+          id?: string
+          images?: string[]
+          lat: number
+          lng: number
+          locality_id?: string | null
+          manual_priority?: number
+          name: string
+          price_max: number
+          price_min: number
+          property_type: string
+          status?: string
+        }
+        Update: {
+          bhk?: number[]
+          builder?: string
+          created_at?: string
+          highlights?: string[]
+          id?: string
+          images?: string[]
+          lat?: number
+          lng?: number
+          locality_id?: string | null
+          manual_priority?: number
+          name?: string
+          price_max?: number
+          price_min?: number
+          property_type?: string
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "properties_locality_id_fkey"
+            columns: ["locality_id"]
+            isOneToOne: false
+            referencedRelation: "localities"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      users: {
+        Row: {
+          created_at: string
+          id: string
+          name: string
+          phone: string
+          preferences: Json
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          name: string
+          phone: string
+          preferences?: Json
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          name?: string
+          phone?: string
+          preferences?: Json
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
