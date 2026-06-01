@@ -51,12 +51,19 @@ export function PropertyDetail({ property, open, onClose, prefs, sessionId, onWh
   const priceText = formatPriceRange(p.price_min, p.price_max);
 
   const onWhatsApp = () => {
+    // Open WhatsApp SYNCHRONOUSLY first to avoid popup blockers.
+    const url = buildWhatsAppUrl(p, priceText);
+    const win = window.open(url, "_blank", "noopener,noreferrer");
+    if (!win) {
+      // Fallback: navigate current tab if popup was blocked.
+      window.location.href = url;
+    }
+    // Fire-and-forget tracking after.
     onWhatsAppClick(p.id);
     intent({ data: {
       property_id: p.id, session_id: sessionId,
       budget_min: prefs.budget_min, budget_max: prefs.budget_max, locality: p.locality_name,
     }}).catch(() => {});
-    window.open(buildWhatsAppUrl(p, priceText), "_blank", "noopener,noreferrer");
   };
 
   const onSubmitForm = async (e: React.FormEvent) => {
