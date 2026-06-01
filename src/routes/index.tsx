@@ -38,9 +38,9 @@ function Index() {
   // One-time idempotent seed on first mount.
   useEffect(() => {
     if (sessionStorage.getItem("nuvia_seeded")) return;
-    ingest({})
+    ingest()
       .then(() => sessionStorage.setItem("nuvia_seeded", "1"))
-      .catch((e) => console.warn("seed:", e?.message));
+      .catch((e: any) => console.warn("seed:", e?.message));
   }, [ingest]);
 
   if (!prefs) return <EntryGate onSubmit={setPrefs} />;
