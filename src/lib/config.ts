@@ -1,7 +1,7 @@
 // Centralized config for Nuvia Estates.
 
 // WhatsApp number for booking. E.164 without "+" (wa.me format).
-export const WHATSAPP_NUMBER = "919876543210"; // TODO: replace with real advisor number
+export const WHATSAPP_NUMBER = "917858938256";
 
 // The 9 whitelisted A-category builders (display names).
 export const WHITELISTED_BUILDERS = [
